@@ -25,16 +25,16 @@ public class Operators {
     public String and(String a, Integer key){
         String result="";
         String tmp=""+Integer.toBinaryString(key);
-        if(tmp.length()<4){
+        char[] c = a.toCharArray();
+        if(tmp.length()<c.length){
             int tmpi=tmp.length();
             tmp="";
-            for(int i=0;i<4-tmpi;i++){
+            for(int i=0;i<c.length-tmpi;i++){
                 tmp+="0";
             }
         }
         tmp+=Integer.toBinaryString(key);
         char[] b= tmp.toString().toCharArray();
-        char[] c = a.toCharArray();
         for(int i=0;i<c.length;i++){
             if(c[i]=='1' && b[i]=='1'){
                 c[i]='1';
@@ -49,16 +49,16 @@ public class Operators {
     public String implicitOr(String a, Integer key){
         String result="";
         String tmp=""+Integer.toBinaryString(key);
-        if(tmp.length()<4){
+        char[]c = a.toCharArray();
+        if(tmp.length()<c.length){
             int tmpi=tmp.length();
             tmp="";
-            for(int i=0;i<4-tmpi;i++){
+            for(int i=0;i<c.length-tmpi;i++){
                 tmp+="0";
             }
         }
         tmp+=Integer.toBinaryString(key);
         char[] b= tmp.toString().toCharArray();
-        char[]c = a.toCharArray();
         for(int i=0;i<c.length;i++){
             if(c[i]=='0'&& b[i]=='0'){
                 c[i]='0';
@@ -73,16 +73,16 @@ public class Operators {
     public String xor(String a, Integer key){
         String result="";
         String tmp=""+Integer.toBinaryString(key);
-        if(tmp.length()<4){
+        char[] c = a.toCharArray();
+        if(tmp.length()<c.length){
             int tmpi=tmp.length();
             tmp="";
-            for(int i=0;i<4-tmpi;i++){
+            for(int i=0;i<c.length-tmpi;i++){
                 tmp+="0";
             }
         }
         tmp+=Integer.toBinaryString(key);
         char[] b= tmp.toString().toCharArray();
-        char[] c = a.toCharArray();
         for(int i=0;i<c.length;i++){
             if((c[i]=='1' && b[i]=='1')||(c[i]=='0' && b[i]=='0')){
                 c[i]='0';

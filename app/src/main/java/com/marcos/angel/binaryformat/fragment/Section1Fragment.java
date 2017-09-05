@@ -144,12 +144,18 @@ public class Section1Fragment extends Fragment {
     }
 
     public String suma(String numa, String numb){
-        int res = Integer.parseInt(numa)+Integer.parseInt(numb);
+        long res =0;
+        try {
+             res = Long.parseLong(numa) + Long.parseLong(numb);
+        }catch(Exception e){
+            e.printStackTrace();
+            return "NUMERO MUY GRANDE";
+        }
 
         if(isTouched){
             String numac= toBinary(numa);
             String numab= toBinary(numb);
-            res = Integer.parseInt(numac)+Integer.parseInt(numab);
+            res = Long.parseLong(numac)+Long.parseLong(numab);
             return res+"";
 
         }else{
@@ -158,14 +164,20 @@ public class Section1Fragment extends Fragment {
 
     }
     public String resta(String numa, String numb){
-        int res = Integer.parseInt(numa)-Integer.parseInt(numb);
+        long res=0;
+        try {
+            res = Long.parseLong(numa) - Long.parseLong(numb);
+        }catch(Exception e){
+            e.printStackTrace();
+            return "NUMERO MUY GRANDE";
+        }
         if(res<0){
             return "NEGATIVO";
         }else {
             if (isTouched) {
                 String numac = toBinary(numa);
                 String numab = toBinary(numb);
-                res = Integer.parseInt(numac) - Integer.parseInt(numab);
+                res = Long.parseLong(numac) - Long.parseLong(numab);
                 return res + "";
 
             } else {
@@ -175,12 +187,23 @@ public class Section1Fragment extends Fragment {
     }
 
     public String mult(String numa, String numb){
-        int res= Integer.parseInt(numa)* Integer.parseInt(numb);
+        long res=0;
+        try {
+            res = Long.parseLong(numa) * Long.parseLong(numb);
+        }catch(Exception e){
+            e.printStackTrace();
+            return "NUMERO MUY GRANDE";
+        }
         if(isTouched){
-            String numac= toBinary(numa);
-            String numbc = toBinary(numb);
-            res = Integer.parseInt(numac)* Integer.parseInt(numbc);
-            return res+"";
+            try {
+                String numac = toBinary(numa);
+                String numbc = toBinary(numb);
+                res = Long.parseLong(numac) * Long.parseLong(numbc);
+                return res + "";
+            }catch(Exception e){
+                e.printStackTrace();
+                return "ERROR";
+            }
         }else{
             return ""+Long.toBinaryString(res);
         }
@@ -196,7 +219,7 @@ public class Section1Fragment extends Fragment {
         lDec1 = inflate.findViewById(R.id.lDec1);
         lDec1.setHint("Decimal");
         lDec2 = inflate.findViewById(R.id.lDec2);
-        lDec2.setHint("DecimL");
+        lDec2.setHint("Decimal");
         lDec2 = inflate.findViewById(R.id.lDec2);
         binaryResult = inflate.findViewById(R.id.binaryResult);
         opcResult = inflate.findViewById(R.id.opcResult);

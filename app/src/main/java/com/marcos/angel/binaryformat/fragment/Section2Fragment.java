@@ -70,69 +70,192 @@ public class Section2Fragment extends Fragment implements AdapterView.OnItemSele
                     if (options[i].getSelectedItem().equals("NOT")) {
                         keysNumber[i] = null;
                     } else {
-                        keysNumber[i] = Integer.parseInt(ks[i].getText().toString());
+                        try {
+                            keys[i]=(int)options[i].getSelectedItemId();
+                            keysNumber[i] = Integer.parseInt(ks[i].getText().toString());
+                        }catch(Exception e){
+                            e.printStackTrace();
+                        }
                     }
                 }
 
 
                 String cResult = "";
                 String binaryNum = binaryNumber.getText().toString();
+                String binaryNuma="";
+                String binaryNumb="";
                 if (binaryNum.equals("")) {
 
                 } else {
-                    String binA = binaryNum.substring(0, 4);
-                    String firstB = binaryNum.substring(4, 8);
-                    String binB = binaryNum.substring(4, 8);
-                    Log.d(TAG, " " + binA + " " + binB);
-                    for (int i = 0; i < options.length; i++) {
-                        switch (keys[i]) {
-                            case 0:
-                                binB = operators.negation(binB);
-                                cResult += binB + "\n";
-                                binB = operators.xor(binB, binA);
-                                cResult += binB + "\n";
-                                binaryNum = firstB + binB;
-                                cResult += binaryNum + "\n";
-                                binA = firstB;
-                                firstB = binB;
-                                break;
-                            case 1:
-                                binB = operators.and(binB, keysNumber[i]);
-                                cResult += binB + "\n";
-                                binB = operators.xor(binB, binA);
-                                cResult += binB + "\n";
-                                binaryNum = firstB + binB;
-                                cResult += binaryNum + "\n";
-                                binA = firstB;
-                                firstB = binB;
-                                break;
-                            case 2:
-                                binB = operators.implicitOr(binB, keysNumber[i]);
-                                cResult += binB + "\n";
-                                binB = operators.xor(binB, binA);
-                                cResult += binB + "\n";
-                                binaryNum = firstB + binB;
-                                cResult += binaryNum + "\n";
-                                binA = firstB;
-                                firstB = binB;
-                                break;
-                            case 3:
-                                binB = operators.xor(binB, keysNumber[i]);
-                                cResult += binB + "\n";
-                                binB = operators.xor(binB, binA);
-                                cResult += binB + "\n";
-                                binaryNum = firstB + binB;
-                                cResult += binaryNum + "\n";
-                                binA = firstB;
-                                firstB = binB;
-                                break;
+                    if(binaryNum.length()<16){
+                        if(binaryNum.length()>8){
+                            int tmp = binaryNum.length();
+                            binaryNum="";
+                            for(int i=0;i<16-tmp;i++){
+                                binaryNum+="0";
+                            }
+                            binaryNum+=binaryNumber.getText().toString();
+                            binaryNuma=binaryNum.substring(0,binaryNum.length()/2);
+                            binaryNumb=binaryNum.substring(binaryNum.length()/2,binaryNum.length());
+                        }else{
+                            int tmp=binaryNum.length();
+                            binaryNum="";
+                            for(int i=0;i<8-tmp;i++){
+                                binaryNum+="0";
+                            }
+                            binaryNum+=binaryNumber.getText().toString();
                         }
+                    }else{
+                        binaryNum=binaryNumber.getText().toString();
+                        binaryNuma=binaryNum.substring(0,binaryNum.length()/2);
+                        binaryNumb=binaryNum.substring(binaryNum.length()/2,binaryNum.length());
                     }
-                    binA = binaryNum.substring(0, 4);
-                    binB = binaryNum.substring(4, 8);
-                    binaryNum = binB + binA;
-                    cResult += binaryNum + "\n";
-                    cResultT.setText(cResult);
+                    String binA = binaryNum.substring(0, binaryNum.length()/2);
+                    String firstB = binaryNum.substring(binaryNum.length()/2, binaryNum.length());
+                    String binB = binaryNum.substring(binaryNum.length()/2, binaryNum.length());
+                    if(binaryNuma.equals("")) {
+                        for (int i = 0; i < options.length; i++) {
+                            switch (keys[i]) {
+                                case 0:
+                                    binB = operators.negation(binB);
+                                    cResult += "NOT  " + binB + "\n";
+                                    binB = operators.xor(binB, binA);
+                                    cResult += "xor  " + binB + "\n";
+                                    binaryNum = firstB + binB;
+                                    cResult += binaryNum + "\n";
+                                    cResult+="----------------\n";
+                                    binA = firstB;
+                                    firstB = binB;
+                                    break;
+                                case 1:
+                                    binB = operators.and(binB, keysNumber[i]);
+                                    cResult += "AND  " + keysNumber[i] + binB + "\n";
+                                    binB = operators.xor(binB, binA);
+                                    cResult += "xor  " + binB + "\n";
+                                    binaryNum = firstB + binB;
+                                    cResult += binaryNum + "\n";
+                                    cResult+="----------------\n";
+                                    binA = firstB;
+                                    firstB = binB;
+                                    break;
+                                case 2:
+                                    binB = operators.implicitOr(binB, keysNumber[i]);
+                                    cResult += "OR   " + keysNumber[i] + binB + "\n";
+                                    binB = operators.xor(binB, binA);
+                                    cResult += "xor  " + binB + "\n";
+                                    binaryNum = firstB + binB;
+                                    cResult += binaryNum + "\n";
+                                    cResult+="----------------\n";
+                                    binA = firstB;
+                                    firstB = binB;
+                                    break;
+                                case 3:
+                                    binB = operators.xor(binB, keysNumber[i]);
+                                    cResult += "XOR  " + keysNumber[i] + binB + "\n";
+                                    binB = operators.xor(binB, binA);
+                                    cResult += "xor  " + binB + "\n";
+                                    binaryNum = firstB + binB;
+                                    cResult += binaryNum + "\n";
+                                    cResult+="----------------\n";
+                                    binA = firstB;
+                                    firstB = binB;
+                                    break;
+                            }
+                        }
+                        binA = binaryNum.substring(0, binaryNum.length() / 2);
+                        binB = binaryNum.substring(binaryNum.length() / 2, binaryNum.length());
+                        binaryNum = binB + binA;
+                        cResult += binaryNum + "\n";
+                        cResultT.setText(cResult);
+                    }else{
+                        String b1="";
+                        String b2="";
+                        int k1=0;
+                        int k2=0;
+                        String firstB1="";
+                        binA=binaryNumb.substring(0,binaryNumb.length()/2);
+                        binB=binaryNumb.substring(binaryNumb.length()/2,binaryNumb.length());
+                        firstB1=binaryNumb;
+                        for (int i = 0; i < options.length; i++) {
+                            switch (keys[i]) {
+                                case 0:
+                                    binaryNumb = operators.negation(binaryNumb);
+                                    cResult += "NOT  " + binaryNumb + "\n";
+                                    binaryNumb = operators.xor(binaryNumb, binaryNuma);
+                                    cResult += "xor  " + binaryNumb + "\n";
+                                    binaryNum = firstB1 + binaryNumb;
+                                    cResult += binaryNum + "\n";
+                                    cResult+="----------------\n";
+                                    binaryNuma = firstB1;
+                                    firstB1 = binaryNumb;
+                                    break;
+                                case 1:
+                                    b1 ="";
+                                    b2="";
+                                    k1= Integer.parseInt(keysNumber[i].toString().substring(0,1));
+                                    k2= Integer.parseInt(keysNumber[i].toString().substring(1,2));
+                                    b1=binaryNumb.substring(0,binaryNumb.length()/2);
+                                    b2=binaryNumb.substring(binaryNumb.length()/2,binaryNumb.length());
+
+                                    b1 = operators.and(b1, k1);
+                                    b2=operators.and(b2,k2);
+                                    binaryNumb=b1+b2;
+                                    cResult += "AND  " + keysNumber[i] + binaryNumb + "\n";
+                                    binaryNumb = operators.xor(binaryNumb, binaryNuma);
+                                    cResult += "xor  " + binaryNumb + "\n";
+                                    binaryNum = firstB1 + binaryNumb;
+                                    cResult += binaryNum + "\n";
+                                    cResult+="----------------\n";
+                                    binaryNuma = firstB1;
+                                    firstB1 = binaryNumb;
+                                    break;
+                                case 2:
+                                    b1 ="";
+                                    b2="";
+                                    k1= Integer.parseInt(keysNumber[i].toString().substring(0,1));
+                                    k2= Integer.parseInt(keysNumber[i].toString().substring(1,2));
+                                    b1=binaryNumb.substring(0,binaryNumb.length()/2);
+                                    b2=binaryNumb.substring(binaryNumb.length()/2,binaryNumb.length());
+                                    b1=operators.implicitOr(b1,k1);
+                                    b2=operators.implicitOr(b2,k2);
+                                    binaryNumb=b1+b2;
+                                    cResult += "OR   " + keysNumber[i] + binaryNumb+ "\n";
+                                    binaryNumb = operators.xor(binaryNumb, binaryNuma);
+                                    cResult += "xor  " + binaryNumb + "\n";
+                                    binaryNum = firstB1 + binaryNumb;
+                                    cResult += binaryNum + "\n";
+                                    cResult+="----------------\n";
+                                    binaryNuma = firstB1;
+                                    firstB1 = binaryNumb;
+                                    break;
+                                case 3:
+                                    b1 ="";
+                                    b2="";
+                                    k1= Integer.parseInt(keysNumber[i].toString().substring(0,1));
+                                    k2= Integer.parseInt(keysNumber[i].toString().substring(1,2));
+                                    b1=binaryNumb.substring(0,binaryNumb.length()/2);
+                                    b2=binaryNumb.substring(binaryNumb.length()/2,binaryNumb.length());
+
+                                    b1=operators.xor(b1,k1);
+                                    b2=operators.xor(b2,k2);
+                                    binaryNumb=b1+b2;
+                                    cResult += "XOR  " + keysNumber[i] + binaryNumb + "\n";
+                                    binaryNumb = operators.xor(binaryNumb, binaryNuma);
+                                    cResult += "xor  " + binaryNumb + "\n";
+                                    binaryNum = firstB1 + binaryNumb;
+                                    cResult += binaryNum + "\n";
+                                    cResult+="----------------\n";
+                                    binaryNuma = firstB1;
+                                    firstB1 = binaryNumb;
+                                    break;
+                            }
+                        }
+                        binaryNuma = binaryNum.substring(0, binaryNum.length() / 2);
+                        binaryNumb = binaryNum.substring(binaryNum.length() / 2, binaryNum.length());
+                        binaryNum = binaryNumb + binaryNuma;
+                        cResult += binaryNum + "\n";
+                        cResultT.setText(cResult);
+                    }
                 }
             }
         });
@@ -158,8 +281,12 @@ public class Section2Fragment extends Fragment implements AdapterView.OnItemSele
             case 1:
                 for(int j=0;j<options.length;j++){
                     if(options[j].getId()==id){
-                        keysNumber[j]=Integer.parseInt(ks[j].getText().toString());
-                        keys[j]=1;
+                        try {
+                            keysNumber[j] = Integer.parseInt(ks[j].getText().toString());
+                            keys[j] = 1;
+                        }catch(Exception e){
+                            e.printStackTrace();
+                        }
                     }
                 }
                 break;
