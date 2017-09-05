@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:screenOrientation="portrait"
     tools:context="com.marcos.angel.binaryformat.fragment.Section2Fragment">
 
     <ScrollView
@@ -67,7 +68,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Key 1"
-                            android:maxLength="1"
+                            android:maxLength="2"
                             android:inputType="number" />
                     </android.support.design.widget.TextInputLayout>
                     <android.support.design.widget.TextInputLayout
@@ -83,7 +84,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Key 2"
-                            android:maxLength="1"
+                            android:maxLength="2"
                             android:inputType="number"/>
                     </android.support.design.widget.TextInputLayout>
                     <android.support.design.widget.TextInputLayout
@@ -100,7 +101,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Key 3"
-                            android:maxLength="1"
+                            android:maxLength="2"
                             android:inputType="number"/>
                     </android.support.design.widget.TextInputLayout>
                     <android.support.design.widget.TextInputLayout
@@ -117,7 +118,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Key 4"
-                            android:maxLength="1"
+                            android:maxLength="2"
                             android:inputType="number"/>
                     </android.support.design.widget.TextInputLayout>
 
@@ -136,7 +137,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Key 5"
-                            android:maxLength="1"
+                            android:maxLength="2"
                             android:inputType="number"/>
                     </android.support.design.widget.TextInputLayout>
 
@@ -155,7 +156,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Key 6"
-                            android:maxLength="1"
+                            android:maxLength="2"
                             android:inputType="number"/>
                     </android.support.design.widget.TextInputLayout>
 
@@ -174,7 +175,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Key 7"
-                            android:maxLength="1"
+                            android:maxLength="2"
                             android:inputType="number"/>
                     </android.support.design.widget.TextInputLayout>
 
@@ -193,7 +194,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Key 8"
-                            android:maxLength="1"
+                            android:maxLength="2"
                             android:inputType="number"/>
                     </android.support.design.widget.TextInputLayout>
 
@@ -224,7 +225,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="Key 9"
-                                android:maxLength="1"
+                                android:maxLength="2"
                                 android:inputType="number"
 
                                 />
@@ -242,7 +243,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="Key 10"
-                                android:maxLength="1"
+                                android:maxLength="2"
                                 android:inputType="number"/>
                         </android.support.design.widget.TextInputLayout>
                         <android.support.design.widget.TextInputLayout
@@ -259,7 +260,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="Key 11"
-                                android:maxLength="1"
+                                android:maxLength="2"
                                 android:inputType="number"/>
                         </android.support.design.widget.TextInputLayout>
                         <android.support.design.widget.TextInputLayout
@@ -276,7 +277,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="Key 12"
-                                android:maxLength="1"
+                                android:maxLength="2"
                                 android:inputType="number"/>
                         </android.support.design.widget.TextInputLayout>
 
@@ -295,7 +296,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="Key 13"
-                                android:maxLength="1"
+                                android:maxLength="2"
                                 android:inputType="number"/>
                         </android.support.design.widget.TextInputLayout>
 
@@ -314,7 +315,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Key 14"
-                            android:maxLength="1"
+                            android:maxLength="2"
                             android:inputType="number"/>
                     </android.support.design.widget.TextInputLayout>
 
@@ -333,7 +334,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="Key 15"
-                                android:maxLength="1"
+                                android:maxLength="2"
                                 android:inputType="number"/>
                         </android.support.design.widget.TextInputLayout>
 
@@ -352,7 +353,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="Key 16"
-                                android:maxLength="1"
+                                android:maxLength="2"
                                 android:inputType="number"/>
                         </android.support.design.widget.TextInputLayout>
                     </LinearLayout>
@@ -360,7 +361,16 @@
                 </LinearLayout>
 
             </LinearLayout>
-
+            <TextView
+                android:id="@+id/cResult"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:layout_gravity="center"
+                android:text=""
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="24dp"
+                android:textStyle="bold"/>
         </LinearLayout>
     </ScrollView>
 

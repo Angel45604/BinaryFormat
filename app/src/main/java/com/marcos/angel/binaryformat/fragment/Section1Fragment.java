@@ -153,21 +153,36 @@ public class Section1Fragment extends Fragment {
             return res+"";
 
         }else{
-            return "RESULT"+Long.toBinaryString(res);
+            return ""+Long.toBinaryString(res);
         }
 
     }
     public String resta(String numa, String numb){
         int res = Integer.parseInt(numa)-Integer.parseInt(numb);
+        if(res<0){
+            return "NEGATIVO";
+        }else {
+            if (isTouched) {
+                String numac = toBinary(numa);
+                String numab = toBinary(numb);
+                res = Integer.parseInt(numac) - Integer.parseInt(numab);
+                return res + "";
 
+            } else {
+                return""+Long.toBinaryString(res);
+            }
+        }
+    }
+
+    public String mult(String numa, String numb){
+        int res= Integer.parseInt(numa)* Integer.parseInt(numb);
         if(isTouched){
             String numac= toBinary(numa);
-            String numab= toBinary(numb);
-            res = Integer.parseInt(numac)-Integer.parseInt(numab);
+            String numbc = toBinary(numb);
+            res = Integer.parseInt(numac)* Integer.parseInt(numbc);
             return res+"";
-
         }else{
-            return "RESULT"+Long.toBinaryString(res);
+            return ""+Long.toBinaryString(res);
         }
     }
 
@@ -180,6 +195,8 @@ public class Section1Fragment extends Fragment {
         dec1.addTextChangedListener(tw);
         lDec1 = inflate.findViewById(R.id.lDec1);
         lDec1.setHint("Decimal");
+        lDec2 = inflate.findViewById(R.id.lDec2);
+        lDec2.setHint("DecimL");
         lDec2 = inflate.findViewById(R.id.lDec2);
         binaryResult = inflate.findViewById(R.id.binaryResult);
         opcResult = inflate.findViewById(R.id.opcResult);
@@ -196,7 +213,23 @@ public class Section1Fragment extends Fragment {
         btnResta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                opcResult.setText(resta(dec1.getText().toString(),dec2.getText().toString()));
+                if(dec1.getText().toString()=="" ||dec2.getText().toString()==""){
+                    opcResult.setText("LLENA LOS 2 CAMPOS");
+                }else {
+                    opcResult.setText(resta(dec1.getText().toString(), dec2.getText().toString()));
+                }
+            }
+        });
+
+        btnMult = inflate.findViewById(R.id.btn3);
+        btnMult.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(dec1.getText().toString()==""||dec2.getText().toString()==""){
+                    opcResult.setText("LLENA LOS 2 CAMPOS");
+                }else {
+                    opcResult.setText(mult(dec1.getText().toString(), dec2.getText().toString()));
+                }
             }
         });
 
@@ -217,6 +250,7 @@ public class Section1Fragment extends Fragment {
                         isTouched = true;
                         toggle.setText("Decimal");
                         lDec1.setHint("Binario");
+                        lDec2.setHint("Binario");
                         try {
                             dec1.setText(toDec(dec1.getText().toString()));
                             dec2.setText(toDec(dec2.getText().toString()));
@@ -227,6 +261,7 @@ public class Section1Fragment extends Fragment {
                     else {
                         isTouched=false;
                         lDec1.setHint("Decimal");
+                        lDec2.setHint("Decimal");
                         toggle.setText("Binario");
                         try {
                             dec1.setText(toBinary(dec1.getText().toString()));

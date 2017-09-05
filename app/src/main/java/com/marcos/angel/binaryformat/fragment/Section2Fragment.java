@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.marcos.angel.binaryformat.R;
 
@@ -21,15 +22,15 @@ public class Section2Fragment extends Fragment implements AdapterView.OnItemSele
     private static final String TAG = "Section2Fragment";
     private static final int[] idKs = {R.id.k1,R.id.k2,R.id.k3,R.id.k4,R.id.k5,R.id.k6,R.id.k7,R.id.k8,R.id.k9,R.id.k10,R.id.k11,R.id.k12,R.id.k13,R.id.k14,R.id.k15,R.id.k16};
     private static final int[] idOs = {R.id.o1,R.id.o2,R.id.o3,R.id.o4,R.id.o5,R.id.o6,R.id.o7,R.id.o8,R.id.o9,R.id.o10,R.id.o11,R.id.o12,R.id.o13,R.id.o14,R.id.o15,R.id.o16};
-    private String number;
     private int[] keys;
     private Integer[] keysNumber;
-    private TextInputEditText k1,k2,k3,k4,k5,k6,k7,k8,k9,k10,k11,k12,k13,k14,k15,k16,binaryNumber;
+    private TextInputEditText binaryNumber;
     private TextInputEditText[] ks;
     private Operators operators;
     private Button btnCifrar;
-    private Spinner o1,o2,o3,o4,o5,o6,o7,o8,o9,o10,o11,o12,o13,o14,o15,o16;
     private Spinner[] options;
+    private TextView cResultT;
+
     public Section2Fragment() {
         // Required empty public constructor
     }
@@ -44,6 +45,7 @@ public class Section2Fragment extends Fragment implements AdapterView.OnItemSele
         ks= new TextInputEditText[16];
         options = new Spinner[16];
         operators= new Operators();
+        cResultT = v.findViewById(R.id.cResult);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
                 R.array.operators_array, android.R.layout.simple_spinner_item);
@@ -63,29 +65,74 @@ public class Section2Fragment extends Fragment implements AdapterView.OnItemSele
         btnCifrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String binaryNum = binaryNumber.getText().toString();
-                Log.d(TAG," "+binaryNum);
-                for(int i=0;i<options.length;i++){
-                    switch(keys[i]){
-                        case 0:
-                            binaryNum = operators.negation(binaryNum);
-                            Log.d(TAG,"ITERACION "+i+" "+binaryNum);
-                            break;
-                        case 1:
-                            binaryNum = operators.and(binaryNum,keysNumber[i]);
-                            Log.d(TAG,"ITERACION "+i+" "+binaryNum);
 
-                            break;
-                        case 2:
-                            binaryNum=operators.implicitOr(binaryNum,keysNumber[i]);
-                            Log.d(TAG,"ITERACION "+i+" "+binaryNum);
-
-                            break;
-                        case 3:
-                            binaryNum=operators.xor(binaryNum,keysNumber[i]);
-                            Log.d(TAG,"ITERACION "+i+" "+binaryNum);
-
+                for (int i = 0; i < keys.length; i++) {
+                    if (options[i].getSelectedItem().equals("NOT")) {
+                        keysNumber[i] = null;
+                    } else {
+                        keysNumber[i] = Integer.parseInt(ks[i].getText().toString());
                     }
+                }
+
+
+                String cResult = "";
+                String binaryNum = binaryNumber.getText().toString();
+                if (binaryNum.equals("")) {
+
+                } else {
+                    String binA = binaryNum.substring(0, 4);
+                    String firstB = binaryNum.substring(4, 8);
+                    String binB = binaryNum.substring(4, 8);
+                    Log.d(TAG, " " + binA + " " + binB);
+                    for (int i = 0; i < options.length; i++) {
+                        switch (keys[i]) {
+                            case 0:
+                                binB = operators.negation(binB);
+                                cResult += binB + "\n";
+                                binB = operators.xor(binB, binA);
+                                cResult += binB + "\n";
+                                binaryNum = firstB + binB;
+                                cResult += binaryNum + "\n";
+                                binA = firstB;
+                                firstB = binB;
+                                break;
+                            case 1:
+                                binB = operators.and(binB, keysNumber[i]);
+                                cResult += binB + "\n";
+                                binB = operators.xor(binB, binA);
+                                cResult += binB + "\n";
+                                binaryNum = firstB + binB;
+                                cResult += binaryNum + "\n";
+                                binA = firstB;
+                                firstB = binB;
+                                break;
+                            case 2:
+                                binB = operators.implicitOr(binB, keysNumber[i]);
+                                cResult += binB + "\n";
+                                binB = operators.xor(binB, binA);
+                                cResult += binB + "\n";
+                                binaryNum = firstB + binB;
+                                cResult += binaryNum + "\n";
+                                binA = firstB;
+                                firstB = binB;
+                                break;
+                            case 3:
+                                binB = operators.xor(binB, keysNumber[i]);
+                                cResult += binB + "\n";
+                                binB = operators.xor(binB, binA);
+                                cResult += binB + "\n";
+                                binaryNum = firstB + binB;
+                                cResult += binaryNum + "\n";
+                                binA = firstB;
+                                firstB = binB;
+                                break;
+                        }
+                    }
+                    binA = binaryNum.substring(0, 4);
+                    binB = binaryNum.substring(4, 8);
+                    binaryNum = binB + binA;
+                    cResult += binaryNum + "\n";
+                    cResultT.setText(cResult);
                 }
             }
         });
@@ -103,7 +150,6 @@ public class Section2Fragment extends Fragment implements AdapterView.OnItemSele
             case 0:
                 for(int j=0;i<options.length;i++){
                     if(options[j].getId()==id){
-                        ks[j].setEnabled(false);
                         keys[j]=0;
                         keysNumber[j]=null;
                     }
@@ -132,8 +178,12 @@ public class Section2Fragment extends Fragment implements AdapterView.OnItemSele
             case 3:
                 for(int j=0;j<options.length;j++){
                     if(options[j].getId()==id){
-                        keysNumber[j]=Integer.parseInt(ks[j].getText().toString());
-                        keys[j]=3;
+                        try {
+                            keysNumber[j] = Integer.parseInt(ks[j].getText().toString());
+                            keys[j] = 3;
+                        }catch(Exception e){
+                            e.printStackTrace();
+                        }
                     }
                 }
                 break;
