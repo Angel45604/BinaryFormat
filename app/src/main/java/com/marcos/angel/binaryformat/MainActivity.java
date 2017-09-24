@@ -1,17 +1,13 @@
 package com.marcos.angel.binaryformat;
 
-import android.content.DialogInterface;
-import android.net.Uri;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 
-import com.marcos.angel.binaryformat.fragment.Section1Fragment;
 import com.marcos.angel.binaryformat.fragmentPagerAdapter.ViewPagerAdapter;
 
-public class MainActivity extends AppCompatActivity implements Section1Fragment.OnFragmentInteractionListener{
+public class MainActivity extends AppCompatActivity{
 
     private ViewPagerAdapter viewPagerAdapter;
     private ViewPager viewPager;
@@ -31,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements Section1Fragment.
 
         tabLayout.addTab(tabLayout.newTab());
         tabLayout.addTab(tabLayout.newTab());
+        tabLayout.addTab(tabLayout.newTab());
 
         viewPager = (ViewPager) findViewById(R.id.MainViewPager);
         tabLayout.setupWithViewPager(viewPager);
@@ -42,8 +39,4 @@ public class MainActivity extends AppCompatActivity implements Section1Fragment.
 
     }
 
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
-    }
 }

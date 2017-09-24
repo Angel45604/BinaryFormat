@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:screenOrientation="portrait"
-    tools:context="com.marcos.angel.binaryformat.fragment.Section1Fragment">
+    tools:context="com.marcos.angel.binaryformat.fragment.binary.Section1Fragment">
 
     <!-- TODO: Update blank fragment layout -->
     <ScrollView

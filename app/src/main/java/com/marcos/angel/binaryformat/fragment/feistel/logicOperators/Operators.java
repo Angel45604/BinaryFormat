@@ -1,4 +1,4 @@
-package com.marcos.angel.binaryformat.fragment;
+package com.marcos.angel.binaryformat.fragment.feistel.logicOperators;
 
 /**
  * Created by Angel on 03/09/2017.

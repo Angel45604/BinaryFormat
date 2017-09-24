@@ -1,7 +1,5 @@
-package com.marcos.angel.binaryformat.fragment;
+package com.marcos.angel.binaryformat.fragment.feistel;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
@@ -16,6 +14,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.marcos.angel.binaryformat.R;
+import com.marcos.angel.binaryformat.fragment.feistel.logicOperators.Operators;
 
 public class Section2Fragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
