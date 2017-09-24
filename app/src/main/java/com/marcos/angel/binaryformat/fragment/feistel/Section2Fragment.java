@@ -14,7 +14,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.marcos.angel.binaryformat.R;
-import com.marcos.angel.binaryformat.fragment.feistel.logicOperators.Operators;
+import com.marcos.angel.binaryformat.fragment.logicOperators.Operators;
 
 public class Section2Fragment extends Fragment implements AdapterView.OnItemSelectedListener {
 

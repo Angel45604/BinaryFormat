@@ -28,4 +28,14 @@ public class Binarization {
         return binaryText;
     }
 
+    public String desBinarization(String binarizedText){
+        String binaryText="";
+        for(int i=0;i<binarizedText.length();i+=8){
+            String tmp=binarizedText.substring(i,i+8);
+            Log.d("TAMANIODESBINARIZADO ",tmp);
+            binaryText+=""+Long.parseLong(tmp,2);
+        }
+        return binaryText;
+    }
+
 }
