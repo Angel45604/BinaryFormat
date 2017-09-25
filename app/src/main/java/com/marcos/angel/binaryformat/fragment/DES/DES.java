@@ -129,11 +129,31 @@ public class DES {
 
     public String permutedchoice1(String unpermutedString){
         String permutedString="";
+        ;
         for(int i=0;i<PERMUTEDTABLE1.length;i++){
             permutedString+=unpermutedString.substring(PERMUTEDTABLE1[i]-1,PERMUTEDTABLE1[i]);
         }
 
         return permutedString;
+    }
+
+    /**
+     *
+     * @param permutedString C/D to rotate
+     * @param iteration The iteration
+     * @return The String rotated
+     */
+    public String rotation(String permutedString, int iteration){
+        String subC=permutedString.substring(0,permutedString.length()/2);
+        String subD=permutedString.substring(permutedString.length()/2,permutedString.length());
+        String i1=subC.substring(0,ITERATIONS[iteration]);
+        String i2=subD.substring(0,ITERATIONS[iteration]);
+        subC=subC.substring(ITERATIONS[iteration],subC.length());
+        subC+=i1;
+        subD=subD.substring(ITERATIONS[iteration],subD.length());
+        subD+=i2;
+
+        return subC+subD;
     }
 
     public String permutedchoice2(String permutedString){
@@ -246,24 +266,7 @@ public class DES {
         return finalOutput;
     }
 
-    /**
-     *
-     * @param permutedString C/D to rotate
-     * @param iteration The iteration
-     * @return The String rotated
-     */
-    public String rotation(String permutedString, int iteration){
-        String subC=permutedString.substring(0,permutedString.length()/2);
-        String subD=permutedString.substring(permutedString.length()/2,permutedString.length());
-        String i1=subC.substring(0,ITERATIONS[iteration]);
-        String i2=subD.substring(0,ITERATIONS[iteration]);
-        subC=subC.substring(ITERATIONS[iteration],subC.length());
-        subC+=i1;
-        subD=subD.substring(ITERATIONS[iteration],subD.length());
-        subD+=i2;
 
-        return subC+subD;
-    }
 
     /**
      *

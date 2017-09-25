@@ -16,6 +16,7 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.marcos.angel.binaryformat.R;
+import com.marcos.angel.binaryformat.fragment.operator.BinaryOperators;
 
 
 public class Section1Fragment extends Fragment {
@@ -30,6 +31,8 @@ public class Section1Fragment extends Fragment {
     private SwitchCompat toggle;
     private Button btnSuma, btnResta, btnMult, btnDiv;
     private boolean isTouched = false;
+
+    private BinaryOperators binaryOperators;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -61,6 +64,7 @@ public class Section1Fragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        binaryOperators = new BinaryOperators();
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -72,14 +76,14 @@ public class Section1Fragment extends Fragment {
         public void afterTextChanged(Editable s){
             if(isTouched) {
                 try {
-                    binaryResult.setText(toBinary(dec1.getText().toString()));
+                    binaryResult.setText(binaryOperators.toBinary(dec1.getText().toString()));
                 } catch (Exception e) {
                     binaryResult.setText("");
                     e.printStackTrace();
                 }
             }else{
                 try {
-                    binaryResult.setText(toDec(dec1.getText().toString()));
+                    binaryResult.setText(binaryOperators.toDec(dec1.getText().toString()));
                 }catch(Exception e){
                     binaryResult.setText("");
                     e.printStackTrace();
@@ -94,38 +98,6 @@ public class Section1Fragment extends Fragment {
         }
     };
 
-    public String toBinary(String num){
-        return""+Long.parseLong(num,2);
-    }
-    public String toDec(String num){
-        return""+Long.toBinaryString(Long.parseLong(num));
-    }
-
-    public String integerfrmbinary(int number){
-        int [] positionNumsArr= {1,2,4,8,16,32,64,128};
-        int[] numberSplit = new int [8];
-        int count1=0;
-        int decimalValue=0;
-        while (number > 0)
-        {
-            numberSplit[count1]=( number % 10);
-            if(numberSplit[count1]!=1 && numberSplit[count1] !=0){
-                return "Binario Invalido";
-            }
-            count1++;
-            number = number / 10;
-        }
-        for(int count2 = 0;count2<8;count2++)
-        {
-            if(numberSplit[count2]==1)
-            {
-                decimalValue=decimalValue+positionNumsArr[count2];
-            }
-        }
-
-        return ""+decimalValue;
-    }
-
     public String suma(String numa, String numb){
         long res =0;
         try {
@@ -136,8 +108,8 @@ public class Section1Fragment extends Fragment {
         }
 
         if(isTouched){
-            String numac= toBinary(numa);
-            String numab= toBinary(numb);
+            String numac= binaryOperators.toBinary(numa);
+            String numab= binaryOperators.toBinary(numb);
             res = Long.parseLong(numac)+Long.parseLong(numab);
             return res+"";
 
@@ -158,8 +130,8 @@ public class Section1Fragment extends Fragment {
             return "NEGATIVO";
         }else {
             if (isTouched) {
-                String numac = toBinary(numa);
-                String numab = toBinary(numb);
+                String numac = binaryOperators.toBinary(numa);
+                String numab = binaryOperators.toBinary(numb);
                 res = Long.parseLong(numac) - Long.parseLong(numab);
                 return res + "";
 
@@ -179,8 +151,8 @@ public class Section1Fragment extends Fragment {
         }
         if(isTouched){
             try {
-                String numac = toBinary(numa);
-                String numbc = toBinary(numb);
+                String numac = binaryOperators.toBinary(numa);
+                String numbc = binaryOperators.toBinary(numb);
                 res = Long.parseLong(numac) * Long.parseLong(numbc);
                 return res + "";
             }catch(Exception e){
@@ -259,8 +231,8 @@ public class Section1Fragment extends Fragment {
                         lDec1.setHint("Binario");
                         lDec2.setHint("Binario");
                         try {
-                            dec1.setText(toDec(dec1.getText().toString()));
-                            dec2.setText(toDec(dec2.getText().toString()));
+                            dec1.setText(binaryOperators.toDec(dec1.getText().toString()));
+                            dec2.setText(binaryOperators.toDec(dec2.getText().toString()));
                         }catch(Exception e){
                             e.printStackTrace();
                         }
@@ -271,8 +243,8 @@ public class Section1Fragment extends Fragment {
                         lDec2.setHint("Decimal");
                         toggle.setText("Binario");
                         try {
-                            dec1.setText(toBinary(dec1.getText().toString()));
-                            dec2.setText(toBinary(dec2.getText().toString()));
+                            dec1.setText(binaryOperators.toBinary(dec1.getText().toString()));
+                            dec2.setText(binaryOperators.toBinary(dec2.getText().toString()));
                         }catch(Exception e){
                             e.printStackTrace();
                         }
@@ -282,6 +254,7 @@ public class Section1Fragment extends Fragment {
 
         // Inflate the layout for this fragment
         return inflate;
+
     }
 
 }
