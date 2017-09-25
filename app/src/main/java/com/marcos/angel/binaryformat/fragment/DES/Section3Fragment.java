@@ -54,9 +54,8 @@ public class Section3Fragment extends Fragment {
                 //c/u64
                 for(int i=0;i<binarizedText64.length;i++){
                     binarizedText64[i]=binarizedText.substring(i*64,(i+1)*64);
+                    des.setMainBlock(des.initialPermutation(binarizedText64[i]));
                     des.setC(des.permutedchoice1(binarizedText64[i]));
-                    des.setMainBlock(binarizedText64[i]);
-
                     //KS
                     for(int j=0;j<des.getITERATIONScount();j++){
                         String cdx= des.rotation(des.getC(),j);
@@ -68,16 +67,16 @@ public class Section3Fragment extends Fragment {
 
                     //Process
                     for(int j=0;j<ks[i].length;j++){
-                        String mainBlockx=des.initialPermutation(des.getMainBlock());
+                        String mainBlockx=des.getMainBlock();
 
                         String suba= mainBlockx.substring(0,mainBlockx.length()/2);
                         String subb1= mainBlockx.substring(mainBlockx.length()/2,mainBlockx.length());
 
                         String subb2=des.feistel(subb1,ks[i][j]);
 
-                        des.setMainBlock(des.finalPermutation(subb1+operators.xor(subb2,suba)));
+                        des.setMainBlock(subb1+operators.xor(subb2,suba));
                     }
-
+                    des.setMainBlock(des.finalPermutation(des.getMainBlock()));
                     Log.d(TAG,"64CIFRADO: "+des.getMainBlock());
                     cipherText+=des.getMainBlock();
                     Log.d(TAG,"-");
@@ -86,18 +85,18 @@ public class Section3Fragment extends Fragment {
 
                 for(int i=0;i<binarizedText64.length;i++){
                     binarizedText64[i]=cipherText.substring(i*64,(i+1)*64);
-                    des.setMainBlock(binarizedText64[i]);
-
+                    des.setMainBlock(des.initialPermutation(binarizedText64[i]));
                     for(int j=ks[i].length-1;j>=0;j--){
                         Log.d(TAG,"DES"+i+" K"+(j+1)+": "+ks[i][j]);
-                        String mainBlockx=des.initialPermutation(des.getMainBlock());
+                        String mainBlockx=des.getMainBlock();
                         String suba= mainBlockx.substring(0,mainBlockx.length()/2);
                         String subb1= mainBlockx.substring(mainBlockx.length()/2,mainBlockx.length());
+
                         String subb2=des.feistel(subb1,ks[i][j]);
 
-                        des.setMainBlock(des.finalPermutation(subb1+operators.xor(subb2,suba)));
+                        des.setMainBlock(subb1+operators.xor(subb2,suba));
                     }
-
+                    des.setMainBlock(des.finalPermutation(des.getMainBlock()));
                     Log.d(TAG,"64DESCIFRADO: "+des.getMainBlock());
                     descipherText+=des.getMainBlock();
                     Log.d(TAG,"-");
@@ -107,6 +106,10 @@ public class Section3Fragment extends Fragment {
             }
         });
         return inflate;
+    }
+
+    public void cipher(){
+
     }
 
 
