@@ -260,7 +260,7 @@ public class DES {
         // P table is applied to the output and this is the final output of one
         // S-box round:
         String finalOutput="";
-        for(int i=0 ; i < 32 ; i++) {
+        for(int i=0 ; i<PERMUTATION.length; i++) {
             finalOutput+= ""+output[PERMUTATION[i]-1];
         }
         return finalOutput;
