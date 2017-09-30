@@ -28,6 +28,16 @@ public class Binarization {
         return binaryText;
     }
 
+    public String Binarization4(String plainText){
+        String binaryText=Integer.toBinaryString(Integer.parseInt(plainText));
+        String tmp="";
+        for(int i=0;i<(4-binaryText.length());i++){
+            tmp+=0;
+        }
+        tmp+=binaryText;
+        return tmp;
+    }
+
     public String desBinarization(String binarizedText){
         String binaryText="";
         for(int i=0;i<binarizedText.length();i+=8){
