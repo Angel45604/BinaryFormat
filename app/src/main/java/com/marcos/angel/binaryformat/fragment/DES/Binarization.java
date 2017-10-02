@@ -2,6 +2,9 @@ package com.marcos.angel.binaryformat.fragment.DES;
 
 import android.util.Log;
 
+import java.math.BigInteger;
+import java.util.Locale;
+
 /**
  * Created by angel on 23/09/2017.
  */
@@ -46,6 +49,10 @@ public class Binarization {
             binaryText+=""+Long.parseLong(tmp,2);
         }
         return binaryText;
+    }
+
+     String hexToBin(String s) {
+        return new BigInteger(s, 16).toString(2);
     }
 
 }

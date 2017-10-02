@@ -46,16 +46,38 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Clave"
-                    android:maxLength="8"/>
-                <android.support.v7.widget.SwitchCompat
-                    android:id="@+id/toggleCipher"
-                    android:layout_width="wrap_content"
+                    android:maxLength="16"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="6dp"
-                    android:text="ASCII"
-                    android:textOff="HEX"
-                    android:textOn="ASCII"
-                    android:layout_gravity="right"/>
+                    android:baselineAligned="false">
+
+                    <android.support.v7.widget.SwitchCompat
+                        android:id="@+id/toggleCipher"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="6dp"
+                        android:text="Cifrar"
+                        android:textOff="Descifrar"
+                        android:textOn="Cifrar"
+                        android:layout_alignParentLeft="true"/>
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <android.support.v7.widget.SwitchCompat
+                        android:id="@+id/cipherMode"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="6dp"
+                        android:text="ASCII"
+                        android:textOff="HEX"
+                        android:textOn="ASCII"
+                        android:checked="true"
+                        android:layout_alignParentRight="true"/>
+                </LinearLayout>
 
             </android.support.design.widget.TextInputLayout>
 

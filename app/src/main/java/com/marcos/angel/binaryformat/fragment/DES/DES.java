@@ -134,6 +134,8 @@ public class DES {
     public String c;
 
     public String mainBlock;
+    public String ln_1;
+    public String rn_1;
 
     public DES(){
 
@@ -281,4 +283,19 @@ public class DES {
         return ITERATIONS.length;
     }
 
+    public String getLn_1() {
+        return ln_1;
+    }
+
+    public void setLn_1(String ln_1) {
+        this.ln_1 = ln_1;
+    }
+
+    public String getRn_1() {
+        return rn_1;
+    }
+
+    public void setRn_1(String rn_1) {
+        this.rn_1 = rn_1;
+    }
 }
