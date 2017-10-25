@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity{
         tabLayout.addTab(tabLayout.newTab());
         tabLayout.addTab(tabLayout.newTab());
         tabLayout.addTab(tabLayout.newTab());
+        tabLayout.addTab(tabLayout.newTab());
 
         viewPager = (ViewPager) findViewById(R.id.MainViewPager);
         tabLayout.setupWithViewPager(viewPager);

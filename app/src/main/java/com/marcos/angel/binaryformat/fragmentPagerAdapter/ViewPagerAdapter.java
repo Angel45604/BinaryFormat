@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.marcos.angel.binaryformat.fragment.mask.Section4Fragment;
 import com.marcos.angel.binaryformat.fragment.binary.Section1Fragment;
 import com.marcos.angel.binaryformat.fragment.feistel.Section2Fragment;
 import com.marcos.angel.binaryformat.fragment.DES.Section3Fragment;
@@ -34,6 +35,8 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
                 return new Section2Fragment();
             case 2:
                 return new Section3Fragment();
+            case 3:
+                return new Section4Fragment();
             default:
                 return null;
         }
@@ -53,6 +56,8 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
                 return "Feistel";
             case 2:
                 return "DES";
+            case 3:
+                return "Subtneteo";
             default:
                 return null;
         }
